@@ -1,4 +1,14 @@
-<style>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio - Nabil Motya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
     :root {
       --bleu-techno: #4FD1C5;
       --vert-innovation: #4FD1C5;
@@ -13,9 +23,15 @@
       --secondary-color: #2a4365;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
       background: var(--bg-color);
       color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
     }
 
     #accueil {
@@ -188,6 +204,7 @@
       gap: 0.6rem;
       color: var(--text-muted);
       letter-spacing: 0.5px;
+      margin: 0;
     }
 
     .sous-titre i {
@@ -341,12 +358,7 @@
       to { transform: translateX(-50%); }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .skills-track { animation: none; }
-    }
-
     /* ===== Hub de connexion ===== */
-
     .connect-zone {
       margin-top: 4rem;
       display: flex;
@@ -441,8 +453,8 @@
     }
 
     .connect-node-wrap--linkedin { top: 0; left: 6%; animation-delay: 0s; }
-    .connect-node-wrap--github   { top: 0; right: 6%; animation-delay: 0.4s; }
-    .connect-node-wrap--email    { bottom: -6px; left: 50%; transform: translateX(-50%); animation-delay: 0.8s; animation-name: nodeFloatEmail; }
+    .connect-node-wrap--github { top: 0; right: 6%; animation-delay: 0.4s; }
+    .connect-node-wrap--email { bottom: -6px; left: 50%; transform: translateX(-50%); animation-delay: 0.8s; animation-name: nodeFloatEmail; }
 
     @keyframes nodeFloat {
       0%, 100% { transform: translateY(0); }
@@ -519,7 +531,6 @@
     }
 
     /* ===== Bandeau "portfolio complet à venir" ===== */
-
     .coming-soon {
       margin-top: 4rem;
       display: inline-flex;
@@ -598,6 +609,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .skills-track,
       .connect-svg path,
       .connect-core,
       .connect-node-wrap,
@@ -611,6 +623,7 @@
     }
 
     @media (max-width: 560px) {
+      #accueil { padding: 1.25rem; }
       .connect-hub { height: 290px; }
       .connect-node-wrap--linkedin { left: 2%; }
       .connect-node-wrap--github { right: 2%; }
@@ -619,9 +632,12 @@
       .coming-soon-text { font-size: 0.8rem; }
       .titre-hero { font-size: 2.4rem; }
       .nom { font-size: 2.1rem; }
+      .sous-titre { gap: 0.6rem; }
+      .sous-titre p { font-size: 0.85rem; }
     }
   </style>
-
+</head>
+<body>
   <section id="accueil">
     <i class="fas fa-cog deco-icon deco-icon--gear1"></i>
     <i class="fas fa-cog deco-icon deco-icon--gear2"></i>
@@ -692,7 +708,6 @@
             <span class="skill-pill"><i class="fas fa-code"></i> Automatisation & code</span>
             <span class="skill-pill"><i class="fas fa-industry"></i> Systèmes industriels</span>
             <span class="skill-pill"><i class="fas fa-satellite-dish"></i> Capteurs & contrôle</span>
-            <!-- duplication pour la boucle infinie -->
             <span class="skill-pill"><i class="fas fa-robot"></i> Robotique</span>
             <span class="skill-pill"><i class="fas fa-microchip"></i> Systèmes embarqués</span>
             <span class="skill-pill"><i class="fas fa-cogs"></i> Mécatronique</span>
@@ -719,21 +734,21 @@
             </div>
 
             <div class="connect-node-wrap connect-node-wrap--linkedin">
-              <a href="https://www.linkedin.com/in/nabilmotya" target="_blank" rel="noopener noreferrer" class="connect-node" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/votre-profil" target="_blank" rel="noopener noreferrer" class="connect-node" aria-label="LinkedIn">
                 <i class="fab fa-linkedin-in"></i>
               </a>
               <span class="connect-label">LinkedIn</span>
             </div>
 
             <div class="connect-node-wrap connect-node-wrap--github">
-              <a href="https://github.com/nabilmotya" target="_blank" rel="noopener noreferrer" class="connect-node" aria-label="GitHub">
+              <a href="https://github.com/votre-profil" target="_blank" rel="noopener noreferrer" class="connect-node" aria-label="GitHub">
                 <i class="fab fa-github"></i>
               </a>
               <span class="connect-label">GitHub</span>
             </div>
 
             <div class="connect-node-wrap connect-node-wrap--email">
-              <a href="#" id="emailNode" class="connect-node" aria-label="Copier l'adresse e-mail" data-email="nabilxmotya@gmail.com">
+              <a href="mailto:votre.email@exemple.com" id="emailNode" class="connect-node" aria-label="Copier l'adresse e-mail" data-email="votre.email@exemple.com">
                 <i class="fas fa-envelope"></i>
               </a>
               <span class="connect-label">E-mail</span>
@@ -763,7 +778,8 @@
     (function () {
       var emailNode = document.getElementById('emailNode');
       var toast = document.getElementById('connectToast');
-      if (emailNode) {
+
+      if (emailNode && toast) {
         emailNode.addEventListener('click', function (e) {
           e.preventDefault();
           var email = emailNode.getAttribute('data-email');
@@ -785,7 +801,7 @@
         });
       }
 
-      // Machine à écrire pour le sous-titre de rôles
+      // Machine à écrire pour le sous-titre de rôles.
       var roles = ['Robotique', 'Automatisation', 'Mécatronique', 'Systèmes intelligents'];
       var el = document.getElementById('typewriterText');
       if (!el) return;
@@ -819,3 +835,5 @@
       tick();
     })();
   </script>
+</body>
+</html>
