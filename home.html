@@ -1,0 +1,539 @@
+<style>
+    :root {
+      --bleu-techno: #4FD1C5;
+      --vert-innovation: #4FD1C5;
+      --accent-orange: #FF8A5C;
+      --bg-color: #0f1b2d;
+      --bg-color-alt: #16233a;
+      --text-color: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-color-rgb: 248, 250, 252;
+      --border-opacity: 0.14;
+      --primary-color: #4FD1C5;
+      --secondary-color: #2a4365;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    #accueil {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(79, 209, 197, 0.10), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(41, 98, 255, 0.12), transparent 45%),
+        var(--bg-color);
+    }
+
+    /* ===== Décor : icônes flottantes robotiques ===== */
+    .deco-icon {
+      position: absolute;
+      color: rgba(79, 209, 197, 0.10);
+      font-size: 3.5rem;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .deco-icon--gear1 { top: 8%; left: 6%; font-size: 4.5rem; animation: spinSlow 22s linear infinite; }
+    .deco-icon--gear2 { bottom: 10%; left: 10%; font-size: 2.8rem; animation: spinSlow 16s linear infinite reverse; }
+    .deco-icon--circuit { top: 12%; right: 8%; font-size: 3.2rem; animation: floatDeco 6s ease-in-out infinite; }
+    .deco-icon--bolt { bottom: 14%; right: 12%; font-size: 2.6rem; animation: floatDeco 5s ease-in-out infinite 1s; }
+
+    @keyframes spinSlow {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes floatDeco {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    .contenu-principal {
+      max-width: 1200px;
+      text-align: center;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .titre-hero {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      font-size: 3.5rem;
+      font-weight: 700;
+    }
+
+    .accent-robot {
+      color: var(--vert-innovation);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: block;
+    }
+
+    .nom {
+      color: var(--text-color);
+      font-size: 3rem;
+      position: relative;
+      display: inline-block;
+      padding: 0 1rem;
+      background: linear-gradient(90deg, #F8FAFC, var(--vert-innovation));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nom::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background: var(--vert-innovation);
+      box-shadow: 0 0 10px rgba(79, 209, 197, 0.6);
+    }
+
+    .sous-titre {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .sous-titre p {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .sous-titre i {
+      color: var(--vert-innovation);
+    }
+
+    .deco-ligne {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--vert-innovation), transparent);
+    }
+
+    .details-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .detail-item {
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(var(--text-color-rgb), var(--border-opacity));
+      border-radius: 16px;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .detail-item:hover {
+      transform: translateY(-6px);
+      border-color: var(--vert-innovation);
+      box-shadow: 0 12px 30px rgba(79, 209, 197, 0.12);
+    }
+
+    .icone-box {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--vert-innovation), #2962FF);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(79, 209, 197, 0.25);
+    }
+
+    .icone-box i {
+      font-size: 1.8rem;
+      color: #0f1b2d;
+    }
+
+    .detail-item p {
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Hub de connexion ===== */
+
+    .connect-zone {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .connect-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.85rem;
+      color: var(--vert-innovation);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .connect-eyebrow::before,
+    .connect-eyebrow::after {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--vert-innovation);
+      opacity: 0.5;
+    }
+
+    .connect-hub {
+      position: relative;
+      width: min(520px, 92vw);
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .connect-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .connect-svg path {
+      fill: none;
+      stroke: var(--vert-innovation);
+      stroke-width: 2;
+      stroke-dasharray: 6 6;
+      opacity: 0.4;
+      animation: fluxCircuit 1.6s linear infinite;
+    }
+
+    @keyframes fluxCircuit {
+      to { stroke-dashoffset: -24; }
+    }
+
+    .connect-core {
+      position: relative;
+      z-index: 2;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, var(--vert-innovation), #1e3a8a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.12), 0 0 30px rgba(79, 209, 197, 0.35);
+      animation: coreHeartbeat 2.4s ease-in-out infinite;
+    }
+
+    .connect-core i {
+      font-size: 1.7rem;
+      color: #0f1b2d;
+    }
+
+    @keyframes coreHeartbeat {
+      0%, 100% { box-shadow: 0 0 0 6px rgba(79, 209, 197, 0.12), 0 0 30px rgba(79, 209, 197, 0.35); }
+      50% { box-shadow: 0 0 0 16px rgba(79, 209, 197, 0.05), 0 0 45px rgba(79, 209, 197, 0.5); }
+    }
+
+    .connect-node-wrap {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      animation: nodeFloat 3.6s ease-in-out infinite;
+    }
+
+    .connect-node-wrap--linkedin { top: 0; left: 6%; animation-delay: 0s; }
+    .connect-node-wrap--github   { top: 0; right: 6%; animation-delay: 0.4s; }
+    .connect-node-wrap--email    { bottom: -6px; left: 50%; transform: translateX(-50%); animation-delay: 0.8s; animation-name: nodeFloatEmail; }
+
+    @keyframes nodeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes nodeFloatEmail {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    .connect-node {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-color-alt);
+      border: 2px solid rgba(79, 209, 197, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+
+    .connect-node i {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      transition: color 0.3s;
+    }
+
+    .connect-node:hover,
+    .connect-node:focus-visible {
+      transform: scale(1.15);
+      border-color: var(--vert-innovation);
+      background: rgba(79, 209, 197, 0.12);
+      box-shadow: 0 0 22px rgba(79, 209, 197, 0.5);
+      outline: none;
+    }
+
+    .connect-node:hover i,
+    .connect-node:focus-visible i {
+      color: var(--vert-innovation);
+    }
+
+    .connect-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+
+    .connect-node-wrap:hover .connect-label {
+      color: var(--vert-innovation);
+    }
+
+    .connect-toast {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--vert-innovation);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      min-height: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .connect-toast.visible {
+      opacity: 1;
+    }
+
+    /* ===== Bandeau "portfolio complet à venir" ===== */
+
+    .coming-soon {
+      margin-top: 4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.9rem 1.6rem;
+      border-radius: 40px;
+      background: rgba(79, 209, 197, 0.06);
+      border: 1px solid rgba(79, 209, 197, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .coming-soon .pulse-dot {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--vert-innovation);
+      flex-shrink: 0;
+    }
+
+    .coming-soon .pulse-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--vert-innovation);
+      animation: pulseRing 1.6s ease-out infinite;
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+
+    .coming-soon-text {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      letter-spacing: 0.3px;
+    }
+
+    .coming-soon-text strong {
+      color: var(--vert-innovation);
+      font-weight: 700;
+    }
+
+    .coming-soon .dots span {
+      animation: dotBlink 1.4s infinite;
+      opacity: 0;
+    }
+    .coming-soon .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .coming-soon .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dotBlink {
+      0%, 20% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .connect-svg path,
+      .connect-core,
+      .connect-node-wrap,
+      .deco-icon,
+      .pulse-dot::after,
+      .dots span {
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .connect-hub { height: 290px; }
+      .connect-node-wrap--linkedin { left: 2%; }
+      .connect-node-wrap--github { right: 2%; }
+      .deco-icon { font-size: 2.2rem !important; }
+      .coming-soon { padding: 0.8rem 1.2rem; }
+      .coming-soon-text { font-size: 0.8rem; }
+    }
+  </style>
+
+  <section id="accueil">
+    <i class="fas fa-cog deco-icon deco-icon--gear1"></i>
+    <i class="fas fa-cog deco-icon deco-icon--gear2"></i>
+    <i class="fas fa-microchip deco-icon deco-icon--circuit"></i>
+    <i class="fas fa-bolt deco-icon deco-icon--bolt"></i>
+
+    <div class="contenu-principal">
+      <div class="presentation">
+        <h1 class="titre-hero">
+          Bienvenue sur mon portfolio,<br>
+          je suis <span class="nom">Nabil Motya</span>
+        </h1>
+
+        <div class="sous-titre">
+          <div class="deco-ligne"></div>
+          <p><i class="fas fa-gears"></i> Ingénieur Électromécanique</p>
+          <div class="deco-ligne"></div>
+        </div>
+
+        <div class="details-container">
+          <div class="detail-item">
+            <div class="icone-box">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3>Profil</h3>
+            <p>Passionné, créatif, rigoureux et axé sur la résolution de problèmes, avec un fort intérêt pour la robotique et l'optimisation de systèmes intelligents.</p>
+          </div>
+
+          <div class="detail-item">
+            <div class="icone-box">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>Opportunités</h3>
+            <p>Je recherche activement des opportunités pour collaborer sur des projets ambitieux autour de la robotique et des systèmes automatisés.</p>
+          </div>
+        </div>
+
+        <div class="connect-zone">
+          <p class="connect-eyebrow"><i class="fas fa-satellite-dish"></i> Restons connectés</p>
+
+          <div class="connect-hub">
+            <svg class="connect-svg" viewBox="0 0 520 250" preserveAspectRatio="none">
+              <path d="M 260 125 L 95 45" />
+              <path d="M 260 125 L 425 45" />
+              <path d="M 260 125 L 260 215" />
+            </svg>
+
+            <div class="connect-core">
+              <i class="fas fa-robot"></i>
+            </div>
+
+            <div class="connect-node-wrap connect-node-wrap--linkedin">
+              <a href="https://www.linkedin.com/in/nabilmotya" target="_blank" rel="noopener noreferrer" class="connect-node" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <span class="connect-label">LinkedIn</span>
+            </div>
+
+            <div class="connect-node-wrap connect-node-wrap--github">
+              <a href="https://github.com/nabilmotya" target="_blank" rel="noopener noreferrer" class="connect-node" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <span class="connect-label">GitHub</span>
+            </div>
+
+            <div class="connect-node-wrap connect-node-wrap--email">
+              <a href="#" id="emailNode" class="connect-node" aria-label="Copier l'adresse e-mail" data-email="nabilxmotya@gmail.com">
+                <i class="fas fa-envelope"></i>
+              </a>
+              <span class="connect-label">E-mail</span>
+            </div>
+          </div>
+
+          <p class="connect-toast" id="connectToast"><i class="fas fa-check-circle"></i> Adresse e-mail copiée !</p>
+        </div>
+
+        <div class="coming-soon">
+          <span class="pulse-dot"></span>
+          <span class="coming-soon-text">
+            Portfolio complet <strong>bientôt disponible</strong>
+            <span class="dots"><span>.</span><span>.</span><span>.</span></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var emailNode = document.getElementById('emailNode');
+      var toast = document.getElementById('connectToast');
+      if (!emailNode) return;
+
+      emailNode.addEventListener('click', function (e) {
+        e.preventDefault();
+        var email = emailNode.getAttribute('data-email');
+
+        var showToast = function () {
+          toast.classList.add('visible');
+          setTimeout(function () {
+            toast.classList.remove('visible');
+          }, 2200);
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(email).then(showToast).catch(function () {
+            window.location.href = 'mailto:' + email;
+          });
+        } else {
+          window.location.href = 'mailto:' + email;
+        }
+      });
+    })();
+  </script>
