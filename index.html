@@ -61,10 +61,49 @@
       z-index: 1;
     }
 
+    /* ===== Badge de statut ===== */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 30px;
+      background: rgba(79, 209, 197, 0.08);
+      border: 1px solid rgba(79, 209, 197, 0.3);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: var(--vert-innovation);
+      margin-bottom: 1.6rem;
+    }
+
+    .status-badge .pulse-dot {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--vert-innovation);
+      flex-shrink: 0;
+    }
+
+    .status-badge .pulse-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--vert-innovation);
+      animation: pulseRing 1.6s ease-out infinite;
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+
     .titre-hero {
       font-family: 'Poppins', sans-serif;
       line-height: 1.2;
-      margin-bottom: 2rem;
+      margin-bottom: 1.2rem;
       font-size: 3.5rem;
       font-weight: 700;
     }
@@ -98,6 +137,42 @@
       height: 3px;
       background: var(--vert-innovation);
       box-shadow: 0 0 10px rgba(79, 209, 197, 0.6);
+    }
+
+    /* ===== Sous-titre machine à écrire ===== */
+    .typewriter-line {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 1.8rem;
+    }
+
+    .typewriter-line .prompt-icon {
+      color: var(--vert-innovation);
+    }
+
+    #typewriterText {
+      color: var(--vert-innovation);
+      font-weight: 600;
+    }
+
+    .typewriter-caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.1rem;
+      background: var(--vert-innovation);
+      margin-left: 2px;
+      animation: caretBlink 0.9s steps(1) infinite;
+    }
+
+    @keyframes caretBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
 
     .sous-titre {
@@ -138,6 +213,32 @@
       border: 1px solid rgba(var(--text-color-rgb), var(--border-opacity));
       border-radius: 16px;
       transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-item::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 16px;
+      padding: 2px;
+      background: conic-gradient(from 0deg, transparent, var(--vert-innovation), transparent 30%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: rotateBorder 4s linear infinite;
+      pointer-events: none;
+    }
+
+    .detail-item:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes rotateBorder {
+      to { transform: rotate(360deg); }
     }
 
     .detail-item:hover {
@@ -166,6 +267,82 @@
     .detail-item p {
       color: var(--text-muted);
       line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ===== Chips à icônes dans Profil / Opportunités ===== */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      background: rgba(79, 209, 197, 0.08);
+      border: 1px solid rgba(79, 209, 197, 0.25);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-color);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .chip i {
+      color: var(--vert-innovation);
+      font-size: 0.8rem;
+    }
+
+    .chip:hover {
+      transform: translateY(-3px) scale(1.05);
+      background: rgba(79, 209, 197, 0.16);
+      border-color: var(--vert-innovation);
+    }
+
+    /* ===== Bande défilante de compétences ===== */
+    .skills-marquee {
+      margin: 3rem 0 1rem;
+      overflow: hidden;
+      position: relative;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .skills-track {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: scrollMarquee 22s linear infinite;
+    }
+
+    .skills-track .skill-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 30px;
+      background: var(--bg-color-alt);
+      border: 1px solid rgba(79, 209, 197, 0.2);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .skills-track .skill-pill i {
+      color: var(--vert-innovation);
+    }
+
+    @keyframes scrollMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .skills-track { animation: none; }
     }
 
     /* ===== Hub de connexion ===== */
@@ -373,11 +550,6 @@
       animation: pulseRing 1.6s ease-out infinite;
     }
 
-    @keyframes pulseRing {
-      0% { transform: scale(1); opacity: 0.7; }
-      100% { transform: scale(3.2); opacity: 0; }
-    }
-
     .coming-soon-text {
       font-size: 0.9rem;
       color: var(--text-color);
@@ -402,13 +574,38 @@
       100% { opacity: 0; }
     }
 
+    /* ===== Indicateur de défilement ===== */
+    .scroll-cue {
+      margin-top: 3rem;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue i {
+      color: var(--vert-innovation);
+      animation: scrollBounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(8px); opacity: 1; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .connect-svg path,
       .connect-core,
       .connect-node-wrap,
       .deco-icon,
       .pulse-dot::after,
-      .dots span {
+      .dots span,
+      .detail-item::before,
+      .scroll-cue i {
         animation: none !important;
       }
     }
@@ -420,6 +617,8 @@
       .deco-icon { font-size: 2.2rem !important; }
       .coming-soon { padding: 0.8rem 1.2rem; }
       .coming-soon-text { font-size: 0.8rem; }
+      .titre-hero { font-size: 2.4rem; }
+      .nom { font-size: 2.1rem; }
     }
   </style>
 
@@ -431,10 +630,21 @@
 
     <div class="contenu-principal">
       <div class="presentation">
+
+        <span class="status-badge">
+          <span class="pulse-dot"></span>
+          Disponible pour de nouveaux projets
+        </span>
+
         <h1 class="titre-hero">
           Bienvenue sur mon portfolio,<br>
           je suis <span class="nom">Nabil Motya</span>
         </h1>
+
+        <p class="typewriter-line">
+          <i class="fas fa-chevron-right prompt-icon"></i>
+          <span id="typewriterText"></span><span class="typewriter-caret"></span>
+        </p>
 
         <div class="sous-titre">
           <div class="deco-ligne"></div>
@@ -449,6 +659,12 @@
             </div>
             <h3>Profil</h3>
             <p>Passionné, créatif, rigoureux et axé sur la résolution de problèmes, avec un fort intérêt pour la robotique et l'optimisation de systèmes intelligents.</p>
+            <div class="chip-row">
+              <span class="chip"><i class="fas fa-brain"></i> Créatif</span>
+              <span class="chip"><i class="fas fa-bullseye"></i> Rigoureux</span>
+              <span class="chip"><i class="fas fa-robot"></i> Robotique</span>
+              <span class="chip"><i class="fas fa-puzzle-piece"></i> Résolution de problèmes</span>
+            </div>
           </div>
 
           <div class="detail-item">
@@ -457,6 +673,34 @@
             </div>
             <h3>Opportunités</h3>
             <p>Je recherche activement des opportunités pour collaborer sur des projets ambitieux autour de la robotique et des systèmes automatisés.</p>
+            <div class="chip-row">
+              <span class="chip"><i class="fas fa-handshake"></i> Collaboration</span>
+              <span class="chip"><i class="fas fa-rocket"></i> Projets ambitieux</span>
+              <span class="chip"><i class="fas fa-industry"></i> Automatisation</span>
+              <span class="chip"><i class="fas fa-globe"></i> Ouvert à distance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-marquee" aria-hidden="true">
+          <div class="skills-track">
+            <span class="skill-pill"><i class="fas fa-robot"></i> Robotique</span>
+            <span class="skill-pill"><i class="fas fa-microchip"></i> Systèmes embarqués</span>
+            <span class="skill-pill"><i class="fas fa-cogs"></i> Mécatronique</span>
+            <span class="skill-pill"><i class="fas fa-drafting-compass"></i> CAO</span>
+            <span class="skill-pill"><i class="fas fa-bolt"></i> Électrotechnique</span>
+            <span class="skill-pill"><i class="fas fa-code"></i> Automatisation & code</span>
+            <span class="skill-pill"><i class="fas fa-industry"></i> Systèmes industriels</span>
+            <span class="skill-pill"><i class="fas fa-satellite-dish"></i> Capteurs & contrôle</span>
+            <!-- duplication pour la boucle infinie -->
+            <span class="skill-pill"><i class="fas fa-robot"></i> Robotique</span>
+            <span class="skill-pill"><i class="fas fa-microchip"></i> Systèmes embarqués</span>
+            <span class="skill-pill"><i class="fas fa-cogs"></i> Mécatronique</span>
+            <span class="skill-pill"><i class="fas fa-drafting-compass"></i> CAO</span>
+            <span class="skill-pill"><i class="fas fa-bolt"></i> Électrotechnique</span>
+            <span class="skill-pill"><i class="fas fa-code"></i> Automatisation & code</span>
+            <span class="skill-pill"><i class="fas fa-industry"></i> Systèmes industriels</span>
+            <span class="skill-pill"><i class="fas fa-satellite-dish"></i> Capteurs & contrôle</span>
           </div>
         </div>
 
@@ -506,6 +750,11 @@
             <span class="dots"><span>.</span><span>.</span><span>.</span></span>
           </span>
         </div>
+
+        <div class="scroll-cue">
+          <span>Découvrir</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </div>
     </div>
   </section>
@@ -514,26 +763,59 @@
     (function () {
       var emailNode = document.getElementById('emailNode');
       var toast = document.getElementById('connectToast');
-      if (!emailNode) return;
+      if (emailNode) {
+        emailNode.addEventListener('click', function (e) {
+          e.preventDefault();
+          var email = emailNode.getAttribute('data-email');
 
-      emailNode.addEventListener('click', function (e) {
-        e.preventDefault();
-        var email = emailNode.getAttribute('data-email');
+          var showToast = function () {
+            toast.classList.add('visible');
+            setTimeout(function () {
+              toast.classList.remove('visible');
+            }, 2200);
+          };
 
-        var showToast = function () {
-          toast.classList.add('visible');
-          setTimeout(function () {
-            toast.classList.remove('visible');
-          }, 2200);
-        };
-
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(email).then(showToast).catch(function () {
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(email).then(showToast).catch(function () {
+              window.location.href = 'mailto:' + email;
+            });
+          } else {
             window.location.href = 'mailto:' + email;
-          });
+          }
+        });
+      }
+
+      // Machine à écrire pour le sous-titre de rôles
+      var roles = ['Robotique', 'Automatisation', 'Mécatronique', 'Systèmes intelligents'];
+      var el = document.getElementById('typewriterText');
+      if (!el) return;
+
+      var roleIndex = 0;
+      var charIndex = 0;
+      var deleting = false;
+
+      function tick() {
+        var current = roles[roleIndex];
+
+        if (!deleting) {
+          charIndex++;
+          el.textContent = current.slice(0, charIndex);
+          if (charIndex === current.length) {
+            deleting = true;
+            setTimeout(tick, 1400);
+            return;
+          }
         } else {
-          window.location.href = 'mailto:' + email;
+          charIndex--;
+          el.textContent = current.slice(0, charIndex);
+          if (charIndex === 0) {
+            deleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+          }
         }
-      });
+        setTimeout(tick, deleting ? 40 : 80);
+      }
+
+      tick();
     })();
   </script>
